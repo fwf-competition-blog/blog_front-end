@@ -27,5 +27,6 @@ module.exports = {
     'max-params': 'off',
     'jsx-quotes': ['error', 'prefer-single'],
     quotes: ['error', 'single'],
+    'vue/multi-word-component-names': 'off',
   },
 };
