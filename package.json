@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "vue": "^3.2.37",
+    "naive-ui": "^2.31.0",
+    "pinia": "^2.0.16",
     "vfonts": "0.0.3",
-    "naive-ui": "^2.31.0"
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.2"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
