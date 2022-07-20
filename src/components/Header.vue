@@ -1,6 +1,4 @@
-<script setup>
-import { NPageHeader, NSpace, NAvatar, NButton } from 'naive-ui';
-</script>
+<script setup></script>
 <template>
   <div class="header">
     <NPageHeader>
