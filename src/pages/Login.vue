@@ -9,20 +9,21 @@ import {
 <script>
 import { defineComponent, ref } from 'vue';
 import { useMessage } from 'naive-ui';
-import { PersonCircle } from '@vicons/ionicons5'
+import { PersonCircle,LockClosed } from '@vicons/ionicons5'
 export default defineComponent({
    components: {
     // eslint-disable-next-line vue/no-unused-components
-  PersonCircle
+  PersonCircle,
+  LockClosed
   },
   setup() {
    const formRef = ref(null);
     const rPasswordFormItemRef = ref(null);
     const message = useMessage();
     const modelRef = ref({
-      age: null,
+      userid: null,
       password: null,
-      reenteredPassword: null
+      
     });
     function validatePasswordStartWith(rule, value) {
       return !!modelRef.value.password && modelRef.value.password.startsWith(value) && modelRef.value.password.length >= value.length;
@@ -31,17 +32,13 @@ export default defineComponent({
       return value === modelRef.value.password;
     }
     const rules = {
-      age: [
+      userid: [
         {
           required: true,
           validator(rule, value) {
             if (!value) {
-              return new Error('需要年龄');
-            } else if (!/^\d*$/.test(value)) {
-              return new Error('年龄应该为整数');
-            } else if (Number(value) < 18) {
-              return new Error('年龄应该超过十八岁');
-            }
+              return new Error('需要填写账户');
+            } 
             return true;
           },
           trigger: ['input', 'blur']
@@ -95,16 +92,21 @@ export default defineComponent({
                   <div class="jss2 css-ykq3zm">
                     <n-form ref="formRef" :model="model" :rules="rules" class="flex flex-column">
                      <h4 class="non-select jss3 css-1pyxybg">登录</h4>
-    <n-form-item path="age" label="年龄">
+    <n-form-item path="userid" label="账号">
       <span class="logo-box">
           <n-icon size="30" :depth="3" class="logo">
     <PersonCircle />
   </n-icon>
       </span>
-      <n-input v-model:value="model.age" @keydown.enter.prevent />
+      <n-input v-model:value="model.userid" @keydown.enter.prevent />
 
     </n-form-item>
     <n-form-item path="password" label="密码">
+            <span class="logo-box">
+          <n-icon size="27" :depth="3" class="logo">
+    <LockClosed />
+  </n-icon>
+      </span>
       <n-input
         v-model:value="model.password"
         type="password"
@@ -116,7 +118,7 @@ export default defineComponent({
       <n-col :span="24">
         <div style="display: flex; justify-content: flex-end">
           <n-button
-            :disabled="model.age === null"
+            :disabled="model.userid === null"
             round
             type="primary"
             @click="handleValidateButtonClick"
