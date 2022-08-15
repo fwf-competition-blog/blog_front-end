@@ -31,6 +31,7 @@ export default defineComponent({
     function validatePasswordSame(rule, value) {
       return value === modelRef.value.password;
     }
+
     const rules = {
       userid: [
         {
@@ -98,7 +99,13 @@ export default defineComponent({
     <PersonCircle />
   </n-icon>
       </span>
-      <n-input v-model:value="model.userid" @keydown.enter.prevent />
+       <n-popover trigger="hover" :overlap="overlap" placement="bottom-end">
+    <template #trigger>
+      <n-input  v-model:value="model.userid" @keydown.enter.prevent on-focus="changeInput"/>
+    </template>
+    <span>请填写此字段</span>
+  </n-popover>
+      
 
     </n-form-item>
     <n-form-item path="password" label="密码">
@@ -114,16 +121,26 @@ export default defineComponent({
         @keydown.enter.prevent
       />
     </n-form-item>
+    <div class="flex flex-column flex-center">
+      <div class="flex" style="margin-bottom: 1rem;">
+<router-link style="margin-right: 0.5rem;" class="css-1uop71e" active-class="active" to="/">
+<button class="css-qqvxpj" style="color:#3F51B5">回到首页</button></router-link>
+<router-link style="margin-right: 0.5rem;" class="css-1uop71e" active-class="active" to="/register">
+<button class="css-r8ryou" style="color:#3F51B5">还没有账号?前往注册</button>
+</router-link>
+    </div>
+    </div>
+    
     <n-row :gutter="[0, 24]">
       <n-col :span="24">
-        <div style="display: flex; justify-content: flex-end">
+        <div style="display: flex; justify-content: center">
           <n-button
             :disabled="model.userid === null"
             round
-            type="primary"
+            type="primary" color="#3F51B5"
             @click="handleValidateButtonClick"
           >
-            验证
+            登录
           </n-button>
         </div>
       </n-col>
@@ -289,5 +306,7 @@ label + .css-135qv08 {
 .logo{
   margin: 0 4px;
 }
-
+button:hover{
+  background: #ecf0f2;
+}
 </style>
